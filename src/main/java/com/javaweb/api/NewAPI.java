@@ -20,6 +20,7 @@ public class NewAPI {
                                @RequestParam(value="address",required=false) String address,
                                @RequestParam(value="poi_id",required=false) List<Integer> poi_id) {
         List<poiDTO> result = PoiService.findAll(name,address,poi_id);
+
         return result;
     }
 
