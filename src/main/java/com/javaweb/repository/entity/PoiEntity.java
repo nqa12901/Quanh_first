@@ -1,15 +1,15 @@
 package com.javaweb.repository.entity;
 
 public class PoiEntity  {
-    private int poi_id;
-    private String name;
-    private int type_id;
-    private String address;
-    private String description;
-    private String image_url;
-    private String open_time;
-    private String close_time;
-    private double price;
+   private int poi_id;
+   private String poi_name;
+   private String type_name;
+   private String address;
+   private String description;
+   private String open_time;
+   private String close_time;
+   private String image_url;
+   private Integer price;
 
     public int getPoi_id() {
         return poi_id;
@@ -19,20 +19,20 @@ public class PoiEntity  {
         this.poi_id = poi_id;
     }
 
-    public String getName() {
-        return name;
+    public String getPoi_name() {
+        return poi_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPoi_name(String poi_name) {
+        this.poi_name = poi_name;
     }
 
-    public int getType_id() {
-        return type_id;
+    public String getType_name() {
+        return type_name;
     }
 
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
+    public void setType_name(String type_name) {
+        this.type_name = type_name;
     }
 
     public String getAddress() {
@@ -51,14 +51,6 @@ public class PoiEntity  {
         this.description = description;
     }
 
-    public String getImage_url() {
-        return image_url;
-    }
-
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
-
     public String getOpen_time() {
         return open_time;
     }
@@ -75,11 +67,19 @@ public class PoiEntity  {
         this.close_time = close_time;
     }
 
-    public double getPrice() {
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }

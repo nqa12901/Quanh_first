@@ -1,26 +1,45 @@
 package com.javaweb.api;
 
+import com.javaweb.model.TourDTO;
 import com.javaweb.model.poiDTO;
+import com.javaweb.model.poiDetailDTO;
 import com.javaweb.model.testDTO;
 import com.javaweb.customexception.RequiredException;
-import com.javaweb.service.PoiService;
+import com.javaweb.repository.PoiDetailRespository;
+import com.javaweb.service.PoiDetailService;
+import com.javaweb.service.TourService;
+import com.javaweb.service.impl.PoiDetailServiceImpl;
+import com.javaweb.service.impl.TourServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 //map tim kiem get - post body them
 @RestController
 public class NewAPI {
     @Autowired
-    private PoiService PoiService;
+    private TourService TourService;
+    @Autowired
+    private TourServiceImpl poiServiceImpl;
 
-    @GetMapping(value = "/api/test")
-    public List<poiDTO> getPoi(@RequestParam(value = "name",required=false) String name,
-                               @RequestParam(value="address",required=false) String address,
-                               @RequestParam(value="poi_id",required=false) List<Integer> poi_id) {
-        List<poiDTO> result = PoiService.findAll(name,address,poi_id);
-        return result;
+    @GetMapping(value = "api/tour")
+    public List<TourDTO> listtour(@RequestParam Map<String, Object> params,
+                                  @RequestParam(name = "duration", required = false) List<String> duration) {
+        List<TourDTO> listTour = TourService.findTour(params, duration);
+        return listTour;
+    }
+
+    @Autowired
+    private PoiDetailService PoiDetailService;
+    @Autowired
+    private PoiDetailServiceImpl PoiDetailServiceImpl;
+
+    @GetMapping(value = "api/poioftour")
+    public List<poiDetailDTO> listpoioftour(@RequestParam(value = "tour_name") String tour_name) {
+        List<poiDetailDTO> listPoioftour = PoiDetailService.findDetail(tour_name);
+        return listPoioftour;
     }
 
     //EXCEPTION
@@ -31,39 +50,11 @@ public class NewAPI {
             throw new RequiredException("quanh xinh vai o");
         }
     }
-
-    //	@PostMapping(value = "/api/test")
-//	public void postTest(@RequestBody Map<String,String> params){
-//		System.out.print("ok");
-//	}
-    @PostMapping(value = "api/test/")
-    public testDTO postTest(@RequestBody testDTO testDTO) {
-        testDTO result = new testDTO();
-        return testDTO;
-    }
-
-    //xoa san pham// {co dinh phai nhap vao}
-    @DeleteMapping(value = "api/test/{id}")
-    public void deleteTest(@PathVariable Integer id) {
-
-        System.out.print("da xoa" + id);
-    }
-
-
 }
-//		testDTO result = new testDTO();
-//        System.out.print(5 / 0);
-//		result.setName(name);
-//		result.setNumber(number);
-//        checkName(testDTO);
-//
-//        List<testDTO> listTest = new ArrayList<testDTO>();
-//        testDTO testDTO1 = new testDTO();
-//        testDTO1.setName("quanh");
-//        testDTO1.setNumber(3);
-//        testDTO testDTO2 = new testDTO();
-//        testDTO2.setName("quanh2");
-//        testDTO2.setNumber(4);
-//        listTest.add(testDTO1);
-//        listTest.add(testDTO2);
-//        return listTest;
+
+//    @GetMapping(value = "api/quanh")
+//    public List<poiDTO> quanh(@RequestParam Map<String, Object> params,
+//                              @RequestParam (value="type_id",required = false) List<Integer> type_id) {
+//        List<poiDTO> result = PoiService.findAll(params,type_id);
+//        return result;
+//    }
