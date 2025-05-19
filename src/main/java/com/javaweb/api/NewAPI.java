@@ -1,5 +1,6 @@
 package com.javaweb.api;
 
+import com.javaweb.builder.TourSearchBuilder;
 import com.javaweb.model.TourDTO;
 import com.javaweb.model.poiDTO;
 import com.javaweb.model.poiDetailDTO;

@@ -1,6 +1,8 @@
 package com.javaweb.service.impl;
 
+import com.javaweb.builder.TourSearchBuilder;
 import com.javaweb.converter.TourDTOConverter;
+import com.javaweb.converter.TourSearchBuilderConverter;
 import com.javaweb.model.TourDTO;
 import com.javaweb.repository.TourRepository;
 import com.javaweb.repository.entity.TourEntity;
@@ -18,9 +20,12 @@ public class TourServiceImpl implements TourService {
     private TourRepository TourRepository;
     @Autowired
     private TourDTOConverter tourDTOConverter;
+    @Autowired
+    private TourSearchBuilderConverter tourSearchBuilderConverter;
     @Override
-    public List<TourDTO> findTour(Map<String,Object> params,List<String> duration) {
-        List<TourEntity> tourEntities = TourRepository.findTour(params,duration);
+    public List<TourDTO> findTour(Map<String, Object> params,List<String> duration) {
+        TourSearchBuilder tourSearchBuilder=tourSearchBuilderConverter.toTourSearchBuilder( params,duration);
+        List<TourEntity> tourEntities = TourRepository.findTour(tourSearchBuilder);
         List<TourDTO> result = new ArrayList<>();
 
         for (TourEntity tourEntity : tourEntities) {
